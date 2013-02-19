@@ -1,4 +1,4 @@
-# Catcher [![Build Status](https://travis-ci.org/onthebeach/catcher.png?branch=master)](http://travis-ci.org/onthebeach/catcher) [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/onthebeach/catcher)
+# Catcher [![Build Status](https://travis-ci.org/onthebeach/catcher.png?branch=master)](http://travis-ci.org/onthebeach/catcher) [![Code Climate](https://codeclimate.com/github/onthebeach/catcher.png)](https://codeclimate.com/github/onthebeach/catcher)
 
 Catcher wraps JSON API calls, and stores the parsed hash in Memcached.
 Subsequent calls to the same API will either be returned directly from cache, or drop through to the API.
