@@ -75,6 +75,8 @@ The resource can now be called using `Google.search(query)`:
 
 ## Installation
 
+  Install via bundler, or checkout out the repo and run `bundle && rake install`
+
 ### Rails
 
     # Gemfile
