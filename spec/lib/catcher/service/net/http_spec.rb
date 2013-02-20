@@ -49,7 +49,6 @@ module Catcher
 
       describe "#response" do
         let(:encoded) { stub }
-        let(:forced) { stub }
         let(:request) { stub }
         let(:response) { stub }
         let(:body){ stub }
@@ -60,9 +59,7 @@ module Catcher
           service.stubs(:http).returns(http)
           http.expects(:request).returns(response)
           response.expects(:body).returns(body)
-          body.expects(:force_encoding).with('UTF-8').
-            returns(forced)
-          forced.expects(:encode!).with('UTF-8').returns(encoded)
+          Encoder.expects(:encode).with(body).returns(encoded)
         end
 
         it "encodes the response" do

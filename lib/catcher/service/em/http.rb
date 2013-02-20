@@ -14,13 +14,13 @@ module Catcher
         end
 
         def response
-          request.response.force_encoding("UTF-8").encode!("UTF-8")
+          @repsonse ||= Encoder.encode(request.response)
         end
 
         def options
           {
-            connect_timeout => 20,
-            inactivity_timeout => 20
+            :connect_timeout => 20,
+            :inactivity_timeout => 20
           }
         end
 

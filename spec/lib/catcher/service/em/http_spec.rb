@@ -43,16 +43,13 @@ module Catcher
 
       describe "#response" do
         let(:encoded) { stub }
-        let(:forced) { stub }
         let(:request) { stub }
         let(:response) { stub }
 
         before do
           service.stubs(:request).returns(request)
           request.expects(:response).returns(response)
-          response.expects(:force_encoding).with('UTF-8').
-            returns(forced)
-          forced.expects(:encode!).with('UTF-8').returns(encoded)
+          Encoder.expects(:encode).with(response).returns(encoded)
         end
 
         it "encodes the response" do

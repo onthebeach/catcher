@@ -15,7 +15,7 @@ module Catcher
         end
 
         def response
-          @response ||= http.request(request).body.force_encoding("UTF-8").encode!("UTF-8")
+          @response ||= Encoder.encode(http.request(request).body)
         end
 
         def request
