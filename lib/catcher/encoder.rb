@@ -1,6 +1,10 @@
-require 'iconv'
 class Encoder
   def self.encode(string)
-    ::Iconv.conv('UTF-8//IGNORE', 'UTF-8', string + ' ')[0..-2]
+    if string.respond_to?(:encode!)
+      string.encode!('UTF-8')
+    else
+      require 'iconv'
+      ::Iconv.conv('UTF-8//IGNORE', 'UTF-8', string + ' ')[0..-2]
+    end
   end
 end
