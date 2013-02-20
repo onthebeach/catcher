@@ -11,7 +11,7 @@ module Catcher
         end
 
         def parsed_api_response
-          Yajl::Parser.parse(response, symbolize_keys: true) or fail 'Nil API response'
+          Yajl::Parser.parse(response, :symbolize_keys => true) or fail 'Nil API response'
         end
 
         def response
