@@ -1,32 +1,6 @@
 require 'spec_helper'
 
 module Catcher
-  class DummyClass < Catcher::API
-    def id
-      @id ||= @options.fetch(:id)
-    end
-
-    def locale
-      @locale ||= @options.fetch(:locale)
-    end
-
-    def domain
-      "example.com"
-    end
-
-    def cache_key
-      "example-#{locale}-#{id}"
-    end
-
-    def root_key
-      :example
-    end
-
-    def resource
-      "http://#{domain}/#{locale}/#{id}"
-    end
-  end
-
   describe Cache do
     let(:cache_store) { stub }
     let(:service_class) { stub }
@@ -40,7 +14,7 @@ module Catcher
       let(:id) { 1 }
       let(:locale) { :en }
       let(:options) { { id:id, locale:locale}  }
-      let(:api) { DummyClass.new(options) }
+      let(:api) { CacheApi.new(options) }
       let(:cache) { Cache.new(api) }
 
       describe "#new" do
@@ -49,7 +23,7 @@ module Catcher
         end
       end
 
-      describe "#example" do
+      describe "example" do
         context "cached example" do
           let(:cached_resource) { stub }
 
@@ -79,25 +53,53 @@ module Catcher
       describe "#cached_resource" do
         let(:result) { stub }
 
-        before do
-          cache_store.expects(:get).with('example-en-1').returns(result)
+        context "cacheable" do
+          before do
+            cache_store.expects(:get).with('example-en-1').returns(result)
+          end
+
+          it "searches cache" do
+            expect(cache.cached_resource).to eq result
+          end
         end
 
-        it "searches mongo" do
-          expect(cache.cached_resource).to eq result
+        context "uncacheable" do
+          let(:api) { NoCacheApi.new(options) }
+          before do
+            cache_store.expects(:get).never
+          end
+
+          it "does not search cache" do
+            expect(cache.cached_resource).to be_nil
+          end
         end
       end
 
       describe "#cache_resource" do
         let(:response) { stub }
 
-        before do
-          cache.expects(:keyed_response).returns(response)
-          cache_store.expects(:set).with('example-en-1', response)
+        context "cacheable" do
+          before do
+            cache.expects(:keyed_response).returns(response)
+            cache_store.expects(:set).with('example-en-1', response)
+          end
+
+          it "searches cache" do
+            expect(cache.cache_resource).to eq response
+          end
         end
 
-        it "searches mongo" do
-          expect(cache.cache_resource).to eq response
+        context "uncacheable" do
+          let(:api) { NoCacheApi.new(options) }
+
+          before do
+            cache.expects(:keyed_response).returns(response)
+            cache_store.expects(:set).never
+          end
+
+          it "searches cache" do
+            expect(cache.cache_resource).to eq response
+          end
         end
       end
 
@@ -112,7 +114,7 @@ module Catcher
           service.expects(:parsed_api_response).returns(response)
         end
 
-        it "searches mongo" do
+        it "searches cache" do
           expect(cache.keyed_response).to eq example
         end
       end

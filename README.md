@@ -73,6 +73,10 @@ The resource can now be called using `Google.search(query)`:
     results.last.url
     => #<URI::HTTP URL:http://example.com/2>
 
+### Skipping the cache
+
+  Always access the external resource directly by not implementing the `cache_key` method
+
 ## Installation
 
   Install via bundler, or checkout out the repo and run `bundle && rake install`
@@ -91,7 +95,7 @@ The resource can now be called using `Google.search(query)`:
     # Gemfile
     gem 'catcher', github: 'onthebeach/catcher', require: 'catcher/em'
 
-    # config/your_api.rb
+    # config/api_name.rb
     memcached_client = EM::Synchrony::ConnectionPool.new(size: 20) do
       Dalli::Client.new('localhost:11211', async: true, expires_in: 14400, namespace: 'catcher-your-app')
     end

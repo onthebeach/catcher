@@ -18,17 +18,19 @@ module Catcher
       data.with_indifferent_access
     end
 
-    # implement the following methods in sub classes
+    def resource
+      # required, must be a valid url
+      # "http://some.api/endpoint"
+    end
+
     def cache_key
-      # eg "namespace-locale-id"
+      # optional, leave blank to always skip cache
+      # "namespace-locale-id"
     end
 
     def root_key
-      # eg :hotel, if the response includes the root key in json
-    end
-
-    def resource
-      # "http://some.api/endpoint"
+      # optional, include to remove the root key from response
+      # :hotel
     end
   end
 end

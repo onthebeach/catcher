@@ -2,32 +2,6 @@ require 'spec_helper'
 
 describe Catcher do
 
-  class DummyClass < Catcher::API
-    def id
-      @id ||= @options.fetch(:id)
-    end
-
-    def locale
-      @locale ||= @options.fetch(:locale)
-    end
-
-    def cache_key
-      "example-#{locale}-#{id}"
-    end
-
-    def root_key
-      :example
-    end
-
-    def domain
-      'example.com'
-    end
-
-    def resource
-      "http://#{domain}/#{locale}/#{id}"
-    end
-  end
-
   let(:cache_store) { stub }
   before do
     Catcher::CacheStore.stubs(:instance).returns(cache_store)
@@ -54,7 +28,7 @@ describe Catcher do
 
       it "works" do
         EM.synchrony do
-          expect(DummyClass.fetch_for(options)).to eq hash.with_indifferent_access
+          expect(CacheApi.fetch_for(options)).to eq hash.with_indifferent_access
           EventMachine.stop
         end
       end
@@ -67,7 +41,23 @@ describe Catcher do
 
       it "works" do
         EM.synchrony do
-          expect(DummyClass.fetch_for(options)).to eq hash.with_indifferent_access
+          expect(CacheApi.fetch_for(options)).to eq hash.with_indifferent_access
+          EventMachine.stop
+        end
+      end
+    end
+
+    context "No cache" do
+      before do
+        EventMachine::HttpRequest.stubs(:new).returns(request)
+        request.stubs(:get).returns(request)
+        cache_store.expects(:get).never
+        cache_store.expects(:set).never
+      end
+
+      it "works" do
+        EM.synchrony do
+          expect(NoCacheApi.fetch_for(options)).to eq hash.with_indifferent_access
           EventMachine.stop
         end
       end
