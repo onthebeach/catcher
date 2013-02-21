@@ -23,7 +23,7 @@ describe Catcher do
         EventMachine::HttpRequest.stubs(:new).returns(request)
         request.stubs(:get).returns(request)
         cache_store.expects(:get).with(cache_key).returns(false)
-        cache_store.expects(:set).with(cache_key, hash)
+        cache_store.expects(:set).with(cache_key, hash, 500)
       end
 
       it "works" do

@@ -81,7 +81,7 @@ module Catcher
         context "cacheable" do
           before do
             cache.expects(:keyed_response).returns(response)
-            cache_store.expects(:set).with('example-en-1', response)
+            cache_store.expects(:set).with('example-en-1', response, 500)
           end
 
           it "searches cache" do

@@ -77,6 +77,10 @@ The resource can now be called using `Google.search(query)`:
 
   Always access the external resource directly by not implementing the `cache_key` method
 
+### Setting TTL
+
+  If no `expires_in` method is defined, the client set `expires_in` value will be used
+
 ## Installation
 
   Install via bundler, or checkout out the repo and run `bundle && rake install`

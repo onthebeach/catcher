@@ -7,6 +7,7 @@ module Catcher
     let(:client) { MockClient.new }
     let(:key) { stub }
     let(:value) { stub }
+    let(:ttl) { stub }
 
 
     before do
@@ -31,11 +32,11 @@ module Catcher
 
     describe "#set" do
       before do
-        client.expects(:set).with(key, value).returns(true)
+        client.expects(:set).with(key, value, ttl).returns(true)
       end
 
       it "delegates to the client" do
-        expect(CacheStore.instance.set(key, value)).to be true
+        expect(CacheStore.instance.set(key, value, ttl)).to be true
       end
     end
 

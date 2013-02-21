@@ -10,7 +10,7 @@ module Catcher
     end
 
     def cached_resource
-      store.get(@api.cache_key) if cacheable?
+      store.get(api.cache_key) if cacheable?
     end
 
     def cache_resource
@@ -26,18 +26,19 @@ module Catcher
     end
 
     private
+    attr_reader :api
 
     def parsed_api_response
       @parsed_api_response ||= Service.factory(api_resource).parsed_api_response
     end
 
     def root_key
-      @api.root_key
+      api.root_key
     end
     alias :root_key? :root_key
 
     def cache_key
-      @api.cache_key
+      api.cache_key
     end
 
     def cacheable?
@@ -45,15 +46,19 @@ module Catcher
     end
 
     def api_resource
-      @api.resource
+      api.resource
     end
 
     def store
       CacheStore.instance
     end
 
+    def ttl
+      api.expires_in
+    end
+
     def cache(response)
-      store.set(cache_key, response) if cacheable?
+      store.set(cache_key, response, ttl) if cacheable?
     end
   end
 end

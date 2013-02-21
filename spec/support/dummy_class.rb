@@ -18,6 +18,10 @@ class DummyClass < Catcher::API
   def resource
     "http://#{domain}/#{locale}/#{id}"
   end
+
+  def expires_in
+    500
+  end
 end
 
 class CacheApi < DummyClass

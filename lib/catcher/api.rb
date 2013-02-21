@@ -32,5 +32,10 @@ module Catcher
       # optional, include to remove the root key from response
       # :hotel
     end
+
+    def expires_in
+      # optional, include to set expires_in per endpoint
+      # 500
+    end
   end
 end

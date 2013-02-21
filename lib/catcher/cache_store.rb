@@ -12,8 +12,8 @@ module Catcher
       self.instance.client = client
     end
 
-    def set(key, value)
-      safely { @client.set(key, value) }
+    def set(key, value, ttl)
+      safely { @client.set(key, value, ttl) }
     end
 
     def get(key)
