@@ -10,7 +10,7 @@ module Catcher
     end
 
     def cached_resource
-      CacheStore.instance.get(@api.cache_key) if cacheable?
+      store.get(@api.cache_key) if cacheable?
     end
 
     def cache_resource
@@ -48,8 +48,12 @@ module Catcher
       @api.resource
     end
 
+    def store
+      CacheStore.instance
+    end
+
     def cache(response)
-      CacheStore.instance.set(cache_key, response) if cacheable?
+      store.set(cache_key, response) if cacheable?
     end
   end
 end
