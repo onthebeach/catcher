@@ -6,6 +6,10 @@ module Catcher
       new(options).with_indifferent_access
     end
 
+    def self.post_for(options={})
+      new(options).post
+    end
+
     def initialize(options)
       @options = options
     end

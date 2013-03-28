@@ -30,6 +30,20 @@ module Catcher
         end
       end
 
+      describe ".post_for" do
+        let(:response) { stub }
+        let(:api) { stub }
+
+        before do
+          API.expects(:new).with(options).returns(api)
+          api.expects(:post).returns(response)
+        end
+
+        it "calls new, returns as hash" do
+          expect(API.post_for(options)).to eq response
+        end
+      end
+
       describe "#new" do
 
         before do
@@ -61,6 +75,12 @@ module Catcher
           it "returns the api from Cache" do
             expect(api.data).to eq hash
           end
+        end
+      end
+
+      describe "#post" do
+        it 'posts the data and returns the response' do
+          pending
         end
       end
 
