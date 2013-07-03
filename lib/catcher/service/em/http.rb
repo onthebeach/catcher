@@ -14,7 +14,7 @@ module Catcher
         end
 
         def response
-          @repsonse ||= Encoder.encode(request.response)
+          @response ||= Encoder.encode(request.response)
         end
 
         def options
