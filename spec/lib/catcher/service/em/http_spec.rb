@@ -36,7 +36,7 @@ module Catcher
           let(:response) { nil }
           let(:parsed) { nil }
           it 'explodes' do
-            expect{ service.parsed_api_response }.to raise_error
+            expect{ service.parsed_api_response }.to raise_error Service::NilApiResponseError
           end
         end
       end
