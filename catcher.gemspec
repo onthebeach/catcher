@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "catcher"
-  s.version = "1.2.0"
+  s.version = "1.3.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["seenmyfate"]
-  s.date = "2013-02-21"
+  s.date = "2014-12-03"
   s.description = "Catcher wraps JSON API calls, and stores the parsed hash in Memcached. Subsequent calls to the same API will either be returned directly from cache, or drop through to the API."
   s.email = "seenmyfate@gmail.com"
   s.extra_rdoc_files = [
@@ -38,6 +38,7 @@ Gem::Specification.new do |s|
     "lib/catcher/service.rb",
     "lib/catcher/service/em/http.rb",
     "lib/catcher/service/net/http.rb",
+    "lib/catcher/service/nil_api_response_error.rb",
     "spec/catcher_spec.rb",
     "spec/lib/catcher/api_spec.rb",
     "spec/lib/catcher/cache_spec.rb",
@@ -52,7 +53,7 @@ Gem::Specification.new do |s|
   s.homepage = "http://github.com/onthebeach/catcher"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
-  s.rubygems_version = "1.8.13"
+  s.rubygems_version = "1.8.23.2"
   s.summary = "Automatic caching for API calls"
 
   if s.respond_to? :specification_version then
