@@ -13,7 +13,7 @@ module Catcher
     describe Cache do
       let(:id) { 1 }
       let(:locale) { :en }
-      let(:options) { { id:id, locale:locale}  }
+      let(:options) { { :id => id, :locale => locale}  }
       let(:api) { CacheApi.new(options) }
       let(:cache) { Cache.new(api) }
 

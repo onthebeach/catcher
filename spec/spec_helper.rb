@@ -4,7 +4,7 @@ require 'rspec'
 require 'catcher'
 require 'mocha/api'
 require 'simplecov'
-require_relative 'support/dummy_class'
+require 'support/dummy_class'
 
 SimpleCov.start if ENV['COVERAGE']
 

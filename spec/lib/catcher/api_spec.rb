@@ -12,7 +12,7 @@ module Catcher
     describe API do
       let(:id) { 1 }
       let(:locale) { :en }
-      let(:options) { { id:id, locale:locale}  }
+      let(:options) { { :id => id, :locale => locale}  }
       let(:api) { API.new(options) }
       let(:cache) { stub }
 

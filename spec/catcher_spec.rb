@@ -10,10 +10,10 @@ describe Catcher do
 
   describe "Integration" do
 
-    let(:hash) { { id: 1 } }
+    let(:hash) { { :id => 1 } }
     let(:id) { 1 }
     let(:locale) { :en }
-    let(:options) { {id:id, locale:locale} }
+    let(:options) { { :id => id, :locale => locale } }
     let(:cache_key) { 'example-en-1' }
     let(:resource) { "http://example.com/en/1" }
     let(:request) { stub(response:'{"example":{"id":1}}') }
