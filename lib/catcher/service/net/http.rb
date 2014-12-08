@@ -24,10 +24,6 @@ module Catcher
           end
         end
 
-        def port
-          80
-        end
-
         def uri
           URI(url)
         end
@@ -35,7 +31,8 @@ module Catcher
         private
 
         def http
-          ::Net::HTTP.new(uri.host, port).tap do |http|
+          ::Net::HTTP.new(uri.host, uri.port).tap do |http|
+            http.use_ssl = uri.scheme == 'https'
             http.open_timeout = 20
             http.read_timeout = 20
           end

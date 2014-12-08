@@ -25,7 +25,7 @@ module Catcher
 
         before do
           service.stubs(:response).returns(response)
-          Yajl::Parser.expects(:parse).with(response, symbolize_keys: true).
+          Yajl::Parser.expects(:parse).with(response, :symbolize_keys => true).
             returns(parsed)
         end
         it "passes the respones to be parsed" do

@@ -12,7 +12,7 @@ module Catcher
     describe Service::Net::Http do
       let(:url)  { stub }
       let(:host) { stub }
-      let(:uri)  { stub(host: host) }
+      let(:uri)  { stub(:host => host) }
       let(:service) { Service::Net::Http.new(url) }
 
       before do
@@ -31,7 +31,7 @@ module Catcher
 
         before do
           service.stubs(:response).returns(response)
-          Yajl::Parser.expects(:parse).with(response, symbolize_keys: true).
+          Yajl::Parser.expects(:parse).with(response, :symbolize_keys => true).
             returns(parsed)
         end
         it "passes the respones to be parsed" do
