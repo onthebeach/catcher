@@ -13,7 +13,8 @@ module Catcher
       let(:url)  { stub }
       let(:host) { stub }
       let(:uri)  { stub(:host => host) }
-      let(:service) { Service::Net::Http.new(url) }
+      let(:headers) { {} }
+      let(:service) { Service::Net::Http.new(url, headers) }
 
       before do
         service.stubs(URI: uri)
@@ -71,11 +72,24 @@ module Catcher
         let(:response) { stub }
         let(:request) { stub }
         let(:http) { stub }
+        let(:request_uri) { '/example/abc' }
 
         before do
-          ::Net::HTTP::Get.expects(:new).with(url).returns(request)
+          uri.stubs(:request_uri).returns(request_uri)
+          ::Net::HTTP::Get.expects(:new).with(uri.request_uri).returns(request)
           request.expects(:[]=).with('Content-Type', 'application/json')
+        end
 
+        context 'with headers' do
+          let(:headers) { { 'Authorization' => 'XYZ' } }
+
+          before do
+            request.expects(:[]=).with('Authorization', 'XYZ')
+          end
+
+          it 'makes a request with headers included' do
+            expect(service.request).to eq request
+          end
         end
 
         it "makes a request" do

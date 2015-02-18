@@ -108,9 +108,10 @@ module Catcher
         let(:response) { {:example => example} }
         let(:resource) { 'http://example.com/en/1' }
         let(:service) { stub }
+        let(:headers) { { 'Authorization' => 'XYZ' } }
 
         before do
-          service_class.expects(:new).with(resource).returns(service)
+          service_class.expects(:new).with(resource, headers).returns(service)
           service.expects(:parsed_api_response).returns(response)
         end
 

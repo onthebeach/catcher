@@ -5,8 +5,9 @@ module Catcher
     module EM
       class Http
 
-        def initialize(url)
+        def initialize(url, headers)
           @url = url
+          @headers = headers
         end
 
         def parsed_api_response
@@ -25,7 +26,7 @@ module Catcher
         end
 
         def request
-          EventMachine::HttpRequest.new(@url, options).get
+          EventMachine::HttpRequest.new(@url, options).get(:head => @headers)
         end
       end
 
