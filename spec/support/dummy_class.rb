@@ -22,6 +22,10 @@ class DummyClass < Catcher::API
   def expires_in
     500
   end
+
+  def headers
+    { 'Authorization' => 'XYZ' }
+  end
 end
 
 class CacheApi < DummyClass

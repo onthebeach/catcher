@@ -29,7 +29,7 @@ module Catcher
     attr_reader :api
 
     def parsed_api_response
-      @parsed_api_response ||= Service.factory(api_resource).parsed_api_response
+      @parsed_api_response ||= Service.factory(api_resource, headers).parsed_api_response
     end
 
     def root_key
@@ -59,6 +59,10 @@ module Catcher
 
     def cache(response)
       store.set(cache_key, response, ttl) if cacheable?
+    end
+
+    def headers
+      api.headers
     end
   end
 end

@@ -37,5 +37,10 @@ module Catcher
       # optional, include to set expires_in per endpoint
       # 500
     end
+
+    def headers
+      {}
+    end
+
   end
 end

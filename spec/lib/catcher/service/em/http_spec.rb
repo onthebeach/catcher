@@ -12,7 +12,9 @@ module Catcher
 
     describe Service::EM::Http do
       let(:url) { stub }
-      let(:service) { Service::EM::Http.new(url) }
+      let(:headers) { { 'Authorization' => 'XYZ' } }
+      let(:service) { Service::EM::Http.new(url, headers) }
+
       describe "#new" do
         it "takes a url" do
           service
@@ -63,7 +65,7 @@ module Catcher
 
         before do
           EventMachine::HttpRequest.expects(:new).with(url, service.options).returns(request)
-          request.expects(:get).returns(response)
+          request.expects(:get).with(:head => headers).returns(response)
         end
 
         it "makes a request" do

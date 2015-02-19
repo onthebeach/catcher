@@ -6,8 +6,9 @@ module Catcher
     module Net
       class Http
 
-        def initialize(url)
+        def initialize(url, headers)
           @url = url
+          @headers = headers
         end
 
         def parsed_api_response
@@ -19,8 +20,9 @@ module Catcher
         end
 
         def request
-          ::Net::HTTP::Get.new(url).tap do |request|
+          ::Net::HTTP::Get.new(uri.request_uri).tap do |request|
             request['Content-Type'] = 'application/json'
+            @headers.each { |k,v| request[k] = v }
           end
         end
 
