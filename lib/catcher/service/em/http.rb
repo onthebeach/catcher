@@ -4,10 +4,11 @@ module Catcher
   module Service
     module EM
       class Http
+        attr_reader :api
+        private :api
 
-        def initialize(url, headers)
-          @url = url
-          @headers = headers
+        def initialize(api)
+          @api = api
         end
 
         def parsed_api_response
@@ -20,13 +21,14 @@ module Catcher
 
         def options
           {
-            :connect_timeout => 20,
-            :inactivity_timeout => 20
+            connect_timeout: api.open_timeout,
+            inactivity_timeout: api.read_timeout
           }
         end
 
         def request
-          EventMachine::HttpRequest.new(@url, options).get(:head => @headers)
+          EventMachine::HttpRequest.new(api.resource, options).
+            get(head: api.headers)
         end
       end
 

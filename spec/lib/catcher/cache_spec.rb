@@ -111,7 +111,7 @@ module Catcher
         let(:headers) { { 'Authorization' => 'XYZ' } }
 
         before do
-          service_class.expects(:new).with(resource, headers).returns(service)
+          service_class.expects(:new).with(api).returns(service)
           service.expects(:parsed_api_response).returns(response)
         end
 

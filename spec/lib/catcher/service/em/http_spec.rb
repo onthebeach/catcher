@@ -11,9 +11,14 @@ module Catcher
     end
 
     describe Service::EM::Http do
-      let(:url) { stub }
+      let(:resource) { stub }
       let(:headers) { { 'Authorization' => 'XYZ' } }
-      let(:service) { Service::EM::Http.new(url, headers) }
+      let(:api) {
+        stub('Api', resource: resource, headers: headers, open_timeout: 20, read_timeout: 20)
+      }
+      let(:service) {
+        Service::EM::Http.new(api)
+      }
 
       describe "#new" do
         it "takes a url" do
@@ -64,7 +69,7 @@ module Catcher
         let(:request) { stub }
 
         before do
-          EventMachine::HttpRequest.expects(:new).with(url, service.options).returns(request)
+          EventMachine::HttpRequest.expects(:new).with(resource, service.options).returns(request)
           request.expects(:get).with(:head => headers).returns(response)
         end
 

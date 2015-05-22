@@ -29,7 +29,7 @@ module Catcher
     attr_reader :api
 
     def parsed_api_response
-      @parsed_api_response ||= Service.factory(api_resource, headers).parsed_api_response
+      @parsed_api_response ||= Service.factory(api).parsed_api_response
     end
 
     def root_key
