@@ -10,11 +10,16 @@ module Catcher
     end
 
     describe Service::Net::Http do
-      let(:url)  { stub }
+      let(:resource)  { stub }
       let(:host) { stub }
       let(:uri)  { stub(:host => host) }
       let(:headers) { {} }
-      let(:service) { Service::Net::Http.new(url, headers) }
+      let(:api) {
+        stub('Api', resource: resource, headers: headers, open_timeout: 20, read_timeout: 20)
+      }
+      let(:service) {
+        Service::Net::Http.new(api)
+      }
 
       before do
         service.stubs(URI: uri)

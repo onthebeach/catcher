@@ -5,10 +5,11 @@ module Catcher
   module Service
     module Net
       class Http
+        attr_reader :api
+        private :api
 
-        def initialize(url, headers)
-          @url = url
-          @headers = headers
+        def initialize(api)
+          @api = api
         end
 
         def parsed_api_response
@@ -22,12 +23,12 @@ module Catcher
         def request
           ::Net::HTTP::Get.new(uri.request_uri).tap do |request|
             request['Content-Type'] = 'application/json'
-            @headers.each { |k,v| request[k] = v }
+            api.headers.each { |k,v| request[k] = v }
           end
         end
 
         def uri
-          URI(url)
+          URI(api.resource)
         end
 
         private
@@ -35,8 +36,8 @@ module Catcher
         def http
           ::Net::HTTP.new(uri.host, uri.port).tap do |http|
             http.use_ssl = uri.scheme == 'https'
-            http.open_timeout = 20
-            http.read_timeout = 20
+            http.open_timeout = api.open_timeout
+            http.read_timeout = api.read_timeout
           end
         end
 
