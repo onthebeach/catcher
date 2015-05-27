@@ -42,5 +42,15 @@ module Catcher
       {}
     end
 
+    def open_timeout
+      # optional, include to set amount of time to wait for connection
+      20
+    end
+
+    def read_timeout
+      # optional, include to set amount of time to wait for response
+      20
+    end
+
   end
 end
