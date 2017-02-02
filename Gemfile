@@ -1,7 +1,5 @@
 source 'http://rubygems.org'
 
-gem 'em-synchrony'
-gem 'em-http-request'
 gem 'yajl-ruby'
 gem 'dalli'
 gem 'log4r'
