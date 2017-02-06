@@ -62,7 +62,7 @@ module Catcher
       end
 
       it "rescues dalli errors" do
-        expect(CacheStore.instance.safely { CacheStore.instance.get(key) }).to be_false
+        expect(CacheStore.instance.safely { CacheStore.instance.get(key) }).to be false
       end
     end
   end

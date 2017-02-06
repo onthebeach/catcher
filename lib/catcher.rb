@@ -2,6 +2,7 @@ module Catcher
 end
 
 require 'net/http'
+
 require 'catcher/api'
 require 'catcher/cache'
 require 'catcher/cache_store'
