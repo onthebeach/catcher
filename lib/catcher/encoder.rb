@@ -1,5 +1,9 @@
 class Encoder
   def self.encode(string)
-    string.encode('utf-8')
+    if string.encoding == Encoding::ASCII_8BIT
+      string.force_encoding('UTF-8')
+    else
+      string.encode('UTF-8')
+    end
   end
 end
