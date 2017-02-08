@@ -1,10 +1,9 @@
 class Encoder
   def self.encode(string)
-    if string.respond_to?(:encode!)
-      string.encode!('UTF-8', :invalid => :replace, :undef => :replace, :replace => '')
+    if string.encoding == Encoding::ASCII_8BIT
+      string.force_encoding('UTF-8')
     else
-      require 'iconv'
-      ::Iconv.conv('UTF-8//IGNORE', 'UTF-8', string + ' ')[0..-2]
+      string.encode('UTF-8')
     end
   end
 end

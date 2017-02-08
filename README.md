@@ -94,18 +94,6 @@ The resource can now be called using `Google.search(query)`:
     memcached_client = Dalli::Client.new('localhost:11211', expires_in: 14400, namespace: 'catcher-your-app')
     Catcher::CacheStore.client = memcached_client
 
-### Goliath
-
-    # Gemfile
-    gem 'catcher', github: 'onthebeach/catcher', require: 'catcher/em'
-
-    # config/api_name.rb
-    memcached_client = EM::Synchrony::ConnectionPool.new(size: 20) do
-      Dalli::Client.new('localhost:11211', async: true, expires_in: 14400, namespace: 'catcher-your-app')
-    end
-
-    Catcher::CacheStore.client = memcached_client
-
 ### Copyright
 
 Copyright (c) 2013 OnTheBeach Ltd. See LICENSE.txt for

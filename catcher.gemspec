@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = "catcher"
-  s.version = "1.6.0"
+  s.version = "2.0.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["seenmyfate"]
@@ -33,10 +33,8 @@ Gem::Specification.new do |s|
     "lib/catcher/cache.rb",
     "lib/catcher/cache_store.rb",
     "lib/catcher/core_ext/array.rb",
-    "lib/catcher/em.rb",
     "lib/catcher/encoder.rb",
     "lib/catcher/service.rb",
-    "lib/catcher/service/em/http.rb",
     "lib/catcher/service/net/http.rb",
     "lib/catcher/service/nil_api_response_error.rb",
     "spec/catcher_spec.rb",
@@ -44,7 +42,6 @@ Gem::Specification.new do |s|
     "spec/lib/catcher/cache_spec.rb",
     "spec/lib/catcher/cache_store_spec.rb",
     "spec/lib/catcher/encoder_spec.rb",
-    "spec/lib/catcher/service/em/http_spec.rb",
     "spec/lib/catcher/service/net/http_spec.rb",
     "spec/lib/catcher/service_spec.rb",
     "spec/spec_helper.rb",
@@ -56,52 +53,16 @@ Gem::Specification.new do |s|
   s.rubygems_version = "1.8.23.2"
   s.summary = "Automatic caching for API calls"
 
-  if s.respond_to? :specification_version then
-    s.specification_version = 3
-
-    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<em-synchrony>, [">= 0"])
-      s.add_runtime_dependency(%q<em-http-request>, [">= 0"])
-      s.add_runtime_dependency(%q<yajl-ruby>, [">= 0"])
-      s.add_runtime_dependency(%q<dalli>, [">= 0"])
-      s.add_runtime_dependency(%q<log4r>, [">= 0"])
-      s.add_runtime_dependency(%q<activesupport>, [">= 0"])
-      s.add_development_dependency(%q<rspec>, [">= 0"])
-      s.add_development_dependency(%q<yard>, [">= 0"])
-      s.add_development_dependency(%q<bundler>, [">= 0"])
-      s.add_development_dependency(%q<jeweler>, [">= 0"])
-      s.add_development_dependency(%q<mocha>, [">= 0"])
-      s.add_development_dependency(%q<redcarpet>, [">= 0"])
-      s.add_development_dependency(%q<simplecov>, [">= 0"])
-    else
-      s.add_dependency(%q<em-synchrony>, [">= 0"])
-      s.add_dependency(%q<em-http-request>, [">= 0"])
-      s.add_dependency(%q<yajl-ruby>, [">= 0"])
-      s.add_dependency(%q<dalli>, [">= 0"])
-      s.add_dependency(%q<log4r>, [">= 0"])
-      s.add_dependency(%q<activesupport>, [">= 0"])
-      s.add_dependency(%q<rspec>, [">= 0"])
-      s.add_dependency(%q<yard>, [">= 0"])
-      s.add_dependency(%q<bundler>, [">= 0"])
-      s.add_dependency(%q<jeweler>, [">= 0"])
-      s.add_dependency(%q<mocha>, [">= 0"])
-      s.add_dependency(%q<redcarpet>, [">= 0"])
-      s.add_dependency(%q<simplecov>, [">= 0"])
-    end
-  else
-    s.add_dependency(%q<em-synchrony>, [">= 0"])
-    s.add_dependency(%q<em-http-request>, [">= 0"])
-    s.add_dependency(%q<yajl-ruby>, [">= 0"])
-    s.add_dependency(%q<dalli>, [">= 0"])
-    s.add_dependency(%q<log4r>, [">= 0"])
-    s.add_dependency(%q<activesupport>, [">= 0"])
-    s.add_dependency(%q<rspec>, [">= 0"])
-    s.add_dependency(%q<yard>, [">= 0"])
-    s.add_dependency(%q<bundler>, [">= 0"])
-    s.add_dependency(%q<jeweler>, [">= 0"])
-    s.add_dependency(%q<mocha>, [">= 0"])
-    s.add_dependency(%q<redcarpet>, [">= 0"])
-    s.add_dependency(%q<simplecov>, [">= 0"])
-  end
+  s.add_runtime_dependency 'yajl-ruby'
+  s.add_runtime_dependency 'dalli'
+  s.add_runtime_dependency 'log4r'
+  s.add_runtime_dependency 'activesupport'
+  s.add_development_dependency 'rspec'
+  s.add_development_dependency 'yard'
+  s.add_development_dependency 'bundler'
+  s.add_development_dependency 'jeweler'
+  s.add_development_dependency 'mocha'
+  s.add_development_dependency 'redcarpet'
+  s.add_development_dependency 'simplecov'
 end
 
